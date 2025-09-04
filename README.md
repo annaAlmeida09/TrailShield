@@ -3,8 +3,13 @@
 ## Escopo
 Monitorar **localização** (GPS) e **batimentos cardíacos** (MAX30102), além de **movimento** (MPU-6050), enviados do **colete** via LoRa para **estações**. Os dados são armazenados em MySQL e associados a **treinos** e **atletas**, com **alertas** automáticos (ex.: taquicardia/queda).
 
+## Requisitos da Entrega
+- README explicando ideia/escopo e **relacionamentos entre entidades**.
+- Modelo inicial no **MySQL Workbench** (`.mwb`).
+- Repositório **público** em dupla (1 membro envia o link; o outro como colaborador).
+- **Validação**: mínimo **5 entidades** e pelo menos **um** relacionamento de cada tipo (**1:1, 1:N, N:M**).
 
-## Entidades & Relacionamentos 
+## Entidades & Relacionamentos (resumo)
 - **Atleta** 1:1 **Colete (ativo)** via `AtletaColete`.
 - **Colete** 1:N **Medicao** (cada leitura vem de um colete).
 - **Estacao** 1:N **Medicao** (uma estação recebe muitas leituras).
@@ -31,3 +36,8 @@ O diagrama está no arquivo `modelo.mwb`. Principais tabelas:
 - Tabelas filhas para separar payloads (GPS/Cardio/Inercial) → consultas mais limpas e índices específicos.
 - `AtletaColete` mantém o **1:1** de “colete ativo”, permitindo histórico ao trocar o colete.
 - Índices em (`id_colete`, `timestamp_coleta`) para consultas por tempo real.
+
+## Próximos passos
+- Endpoints de ingestão (REST/MQTT).
+- Regras de alerta configuráveis por atleta.
+- Dashboards (mapa + telemetria).
